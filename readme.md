@@ -1,5 +1,5 @@
 # Helper classes for PrestaShop CMS
-Full documented helper classes for PrestaShop CMS (1.7, 1.6, 1.5).
+Full documented helper classes for PrestaShop CMS (8, 1.7, 1.6, 1.5).
 With these helpers some programming tasks becomes more simple and done faster.
 [The library homepage][5].
 
@@ -79,7 +79,7 @@ public function example() {
     $this->log('An error occupied.');
 }
 public function log($messages, $level = AbstractLogger::WARNING) {
-    LogHelper::log($messages, $level, $this->l('A module category example'), $this->id);
+    LogHelper::log($messages, $level, $this->name, $this->id);
 }
 ~~~
 
@@ -144,25 +144,21 @@ Add the dependency directly to your `composer.json` file:
 "repositories": [
   {
     "type": "vcs",
-    "url": "https://github.com/zapalm/prestashopHelpers"
+    "url": "https://github.com/zapalm/prestashop-helpers"
   }
 ],
 "require": {
   "php": ">=5.5",
-  "zapalm/prestashopHelpers": "dev-master"
+  "zapalm/prestashop-helpers": "dev-master"
 },
 ```
 
 ## How to help the project grow and get updates
-* **Become the [patron][2]** or support me by **[Flattr][6]** to help me work more for supporting and improving this project.
-* Report an issue.
-* Give me feedback.
-* Give the star to the project.
-* Contribute to the code.
+Give the **star** to the project. That's all! :)
 
 ## Contributing to the code
 
-### Requirements for code contributors 
+### Requirements for code contributors
 
 Contributors **must** follow the following rules:
 
@@ -181,13 +177,11 @@ Contributors wishing to edit the project's files should follow the following pro
 5. Change the files in your branch. Be sure to follow [the coding standards][1].
 6. Push your changed branch to your fork in your GitHub account.
 7. Create a pull request for your changes **on the *dev* branch** of the project.
-   If you need help to make a pull request, read the [Github help page about creating pull requests][4].
+   If you need help to make a pull request, read the [GitHub help page about creating pull requests][4].
 8. Wait for the maintainer to apply your changes.
 
 **Do not hesitate to create a pull request if even it's hard for you to apply the coding standards.**
 
 [1]: https://www.php-fig.org/psr/
-[2]: https://www.patreon.com/zapalm
 [4]: https://help.github.com/articles/about-pull-requests/
 [5]: https://prestashop.modulez.ru/en/tools-scripts/53-helper-classes-for-prestashop.html
-[6]: https://flattr.com/@zapalm

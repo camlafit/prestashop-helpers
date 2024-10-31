@@ -5,11 +5,13 @@
  * @author    Maksim T. <zapalm@yandex.com>
  * @copyright 2018 Maksim T.
  * @license   https://opensource.org/licenses/MIT MIT
- * @link      https://github.com/zapalm/prestashopHelpers GitHub
+ * @link      https://github.com/zapalm/prestashop-helpers GitHub
  * @link      https://prestashop.modulez.ru/en/tools-scripts/53-helper-classes-for-prestashop.html Homepage
  */
 
 namespace zapalm\prestashopHelpers\helpers;
+
+use DateTime;
 
 /**
  * Date helper.
@@ -47,14 +49,14 @@ class DateHelper {
     /**
      * Returns a title of a day according to the current language.
      *
-     * @param \DateTime|null $dateTime        The DateTime object or null to use the current day.
-     * @param string|null    $languageIsoCode The language ISO code or null to get it automatically from the context.
+     * @param DateTime|null $dateTime        The DateTime object or null to use the current day.
+     * @param string|null   $languageIsoCode The language ISO code or null to get it automatically from the context.
      *
      * @return string
      *
      * @author Maksim T. <zapalm@yandex.com>
      */
-    public static function getDayTitle(\DateTime $dateTime = null, $languageIsoCode = null)
+    public static function getDayTitle(DateTime $dateTime = null, $languageIsoCode = null)
     {
         if (null === $dateTime) {
             $dateTime = new DateTime();
@@ -66,15 +68,15 @@ class DateHelper {
     /**
      * Returns a title of a month according to the current language.
      *
-     * @param \DateTime|null $dateTime        The DateTime object or null to use the current month.
-     * @param string|null    $languageIsoCode The language ISO code or null to get it automatically from the context.
-     * @param string|null    $prefix          The prefix, for example: 'of', 'in' and etc. It is usable for a correct translation with a declination.
+     * @param DateTime|null $dateTime        The DateTime object or null to use the current month.
+     * @param string|null   $languageIsoCode The language ISO code or null to get it automatically from the context.
+     * @param string|null   $prefix          The prefix, for example: 'of', 'in' and etc. It is usable for a correct translation with a declination.
      *
      * @return string
      *
      * @author Maksim T. <zapalm@yandex.com>
      */
-    public static function getMonthTitle(\DateTime $dateTime = null, $languageIsoCode = null, $prefix = null)
+    public static function getMonthTitle(DateTime $dateTime = null, $languageIsoCode = null, $prefix = null)
     {
         if (null === $dateTime) {
             $dateTime = new DateTime();

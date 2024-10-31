@@ -5,7 +5,7 @@
  * @author    Maksim T. <zapalm@yandex.com>
  * @copyright 2018 Maksim T.
  * @license   https://opensource.org/licenses/MIT MIT
- * @link      https://github.com/zapalm/prestashopHelpers GitHub
+ * @link      https://github.com/zapalm/prestashop-helpers GitHub
  * @link      https://prestashop.modulez.ru/en/tools-scripts/53-helper-classes-for-prestashop.html Homepage
  */
 
@@ -392,7 +392,7 @@ class ValidateHelper extends \Validate
     public static function isDomain($domain)
     {
         if (static::isAscii($domain) && false !== strpos($domain, '.') && false === static::isPunycodeDomain($domain)) {
-            if (1 === preg_match('/^((?!-)[A-Za-z0-9-]{1,63}(?<!-)\\.)+[A-Za-z]{2,63}$/', $domain)) {
+            if (1 === preg_match('/^(?!.{254,})(?:(?!-)[A-Za-z0-9-]{1,63}(?<!-)\.)*(?!-)(?![0-9]*$)[A-Za-z0-9-]{1,63}(?<!-)$/', $domain)) {
                 return true;
             }
         }

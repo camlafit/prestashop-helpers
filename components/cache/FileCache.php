@@ -5,11 +5,13 @@
  * @author    Maksim T. <zapalm@yandex.com>
  * @copyright 2018 Maksim T.
  * @license   https://opensource.org/licenses/MIT MIT
- * @link      https://github.com/zapalm/prestashopHelpers GitHub
+ * @link      https://github.com/zapalm/prestashop-helpers GitHub
  * @link      https://prestashop.modulez.ru/en/tools-scripts/53-helper-classes-for-prestashop.html Homepage
  */
 
 namespace zapalm\prestashopHelpers\components\cache;
+
+use Tools;
 
 /**
  * File cache system.
@@ -45,13 +47,15 @@ class FileCache extends BaseCache
     /**
      * Returns an instance of FileCache system.
      *
+     * @param bool $force Force re-init the instance.
+     *
      * @return static The instance.
      *
      * @author Maksim T. <zapalm@yandex.com>
      */
-    public static function getInstance()
+    public static function getInstance($force = false)
     {
-        if (null === static::$instance) {
+        if (null === static::$instance || $force) {
             static::$instance = new static();
         }
 
@@ -69,7 +73,19 @@ class FileCache extends BaseCache
      */
     protected function getFilePath($key)
     {
-        return _PS_CACHEFS_DIRECTORY_ . md5($key) . '.ser';
+        $keyHash       = md5($key);
+        $directoryPath = _PS_CACHEFS_DIRECTORY_;
+
+        // Create nested directories in a path to a cache file
+        for ($i = 0; $i < 3; $i++) {
+            $directoryPath .= $keyHash[$i] . '/';
+        }
+
+        if (false === file_exists($directoryPath)) {
+            @mkdir($directoryPath, 0777, true);
+        }
+
+        return $directoryPath . $keyHash . '.ser';
     }
 
     /**
@@ -106,7 +122,7 @@ class FileCache extends BaseCache
      */
     protected function _exists($key)
     {
-        if (false === isset($this->keys[$key])) {
+        if (false === array_key_exists($key, $this->keys)) {
             return false;
         }
 
@@ -162,7 +178,11 @@ class FileCache extends BaseCache
      */
     public function flush()
     {
-        \Tools::deleteDirectory(_PS_CACHEFS_DIRECTORY_, false);
+        Tools::deleteDirectory(_PS_CACHEFS_DIRECTORY_, false);
+        file_put_contents(_PS_CACHEFS_DIRECTORY_ . 'index.php', Tools::getDefaultIndexContent());
+
+        $this->keys = [];
+        $this->_writeKeys();
 
         return true;
     }
